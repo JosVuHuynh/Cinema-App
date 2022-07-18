@@ -1,13 +1,30 @@
 import "./featured.scss"
 import { InfoOutlined, PlayArrow } from "@material-ui/icons";
-
+import {useEffect, useState} from 'react'
+import axios from 'axios'
 function Featured({type}) {
+    const [content, setContent] = useState({})
+    useEffect(() =>{
+        const getRandomCotent = async () => {
+            try {
+                const res = await axios.get(`/movies/random?type=${type}`,{
+                headers: {
+                    token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDA1ZWNlNDdiYjBmYWI2OWE2Njg5NyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1ODE0MDA5MywiZXhwIjoxNjU4NTcyMDkzfQ.0uB7chXwAMQfaDsxk2tesEVFILPnQUvPeTTJ31z7fRI"
+                }})
+                setContent(res.data[0])
+                console.log(res)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getRandomCotent()
+    },[type])
   return (
     <div className="featured">
         {type && (
             <div className="category">
                 <span>
-                    {type === "movie"? "Movies": "Series"}
+                    {type === "movies"? "Movies": "Series"}
                     <select name="genre" id="genre">
                         <option value="">Genre</option>
                         <option value="adventure">Adventure</option>
@@ -27,10 +44,12 @@ function Featured({type}) {
                 </span>
             </div>
         )}
-        <img src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+        <img 
+        src={content.img}
+        alt="" />
         <div className="info">
             <img 
-                src="https://occ-0-1432-1433.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABUZdeG1DrMstq-YKHZ-dA-cx2uQN_YbCYx7RABDk0y7F8ZK6nzgCz4bp5qJVgMizPbVpIvXrd4xMBQAuNe0xmuW2WjoeGMDn1cFO.webp?r=df1"
+                src={content.imgTitle}
                 alt="" 
             />
             <span className="desc">

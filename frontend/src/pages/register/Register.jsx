@@ -1,5 +1,5 @@
 import "./register.scss"
-
+import { Link } from "react-router-dom"
 export default function Register() {
   return (
     <div className="register">
@@ -10,9 +10,16 @@ export default function Register() {
                     src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Sky_Cinema_-_Logo_2020.svg" 
                     alt=""
                 />
-                <button className="loginButton">Sign In</button>
+                <div>
+                <button type="button" className="loginButton">
+                    <Link to="/login">
+                    Sign In
+                    </Link>
+                   
+                </button> 
+                </div>
             </div>
-        </div>
+        </div>       
         <div className="container">
             <h1>Unlimited movies, TV shows, and more.</h1>
             <h2>Watch anywhere. Cancel anytime.</h2>
@@ -27,6 +34,7 @@ export default function Register() {
                 </button>
             </form>
         </div>
+        
     </div>
   )
 }
