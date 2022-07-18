@@ -1,13 +1,14 @@
 import { useContext, useState} from "react";
 import { login } from "../../context/authContext/apiCalls";
 import { AuthContext } from "../../context/authContext/AuthContext";
+import { Link } from "react-router-dom";
 import "./login.scss";
 
 export default function Login() {
   const [email , setEmail] = useState("")
   const [password, setPassword] = useState("")
   const {dispatch} = useContext(AuthContext)
-  
+
   const handleLogin = (e) => {
     e.preventDefault();
     login({ email, password }, dispatch);
@@ -41,9 +42,11 @@ export default function Login() {
             onClick={handleLogin} 
           
           >Login </button>
-          <span>
-            <b>Sign up now.</b>
-          </span>
+           <Link to="/register">
+            <span>
+              <b>Sign up now.</b>
+            </span>
+           </Link>
           <small>
             This page is protected by Google reCAPTCHA to ensure you're not a
             bot. <b>Learn more</b>.

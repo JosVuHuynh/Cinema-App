@@ -11,12 +11,11 @@ export default function Register() {
                     alt=""
                 />
                 <div>
-                <button type="button" className="loginButton">
-                    <Link to="/login">
-                    Sign In
-                    </Link>
-                   
-                </button> 
+                <Link to="/login">
+                    <button type="button" className="loginButton">
+                        Sign In
+                    </button>
+                </Link>
                 </div>
             </div>
         </div>       
