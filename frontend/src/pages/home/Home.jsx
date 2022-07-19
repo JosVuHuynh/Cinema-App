@@ -14,7 +14,8 @@ const Home = ({type}) => {
           `lists${type ? "?type" + type : ""}${genre ? "&genre" + genre: ""}`,
           {
             headers: {
-              token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDA1ZWNlNDdiYjBmYWI2OWE2Njg5NyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1ODE0MDA5MywiZXhwIjoxNjU4NTcyMDkzfQ.0uB7chXwAMQfaDsxk2tesEVFILPnQUvPeTTJ31z7fRI"
+              token: "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
+
             }
           }
           )

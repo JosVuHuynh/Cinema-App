@@ -1,6 +1,25 @@
 import "./register.scss"
 import { Link } from "react-router-dom"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"
 export default function Register() {
+
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [username, setUsername] = useState("");
+const navigate = useNavigate();
+
+const handleRegister = async(e) => {
+    e.preventDefault();
+    try {
+        await axios.post("auth/register", { email,username, password });
+        navigate("/login");
+    } catch (err) {
+        console.log(err)
+    }
+}
+
   return (
     <div className="register">
         <div className="top">
@@ -20,19 +39,39 @@ export default function Register() {
             </div>
         </div>       
         <div className="container">
-            <h1>Unlimited movies, TV shows, and more.</h1>
-            <h2>Watch anywhere. Cancel anytime.</h2>
-            <p>
-                Ready to watch? Enter your email to create or restart your membership.
-            </p>
-            <form className="input">
-                <input type="email" placeholder="email address" />
-                <input type="password" placeholder="password" />
-                <button className="registerButton">
-                Start
-                </button>
-            </form>
-        </div>
+        <form>
+          <h1>Sign up</h1>
+          <input 
+            type="username" 
+            placeholder="User name" 
+            onChange={(e) => setUsername(e.target.value)}
+          />
+            <input 
+            type="email" 
+            placeholder="Email or phone number" 
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input 
+            type="password" 
+            placeholder="Password"   
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button 
+            className="registerButton" 
+            onClick={handleRegister} 
+          
+          >Register </button>
+           <Link to="/login">
+            <span>
+              <b>Login now.</b>
+            </span>
+           </Link>
+          <small>
+            This page is protected by Google reCAPTCHA to ensure you're not a
+            bot. <b>Learn more</b>.
+          </small>
+        </form>
+      </div>
         
     </div>
   )
